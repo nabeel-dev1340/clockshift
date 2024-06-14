@@ -163,7 +163,7 @@ const TimeInput = () => {
           <div>
             <button
               type="submit"
-              className="bg-orange-400 p-3 rounded-xl shadow-md font-bold"
+              className="bg-[#FF8F00] p-3 rounded-xl shadow-md font-bold"
             >
               Convert
             </button>
