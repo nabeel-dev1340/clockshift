@@ -4,6 +4,7 @@ import Select from "react-select";
 import { TimeZones } from "@/constants/timezones";
 import shiftTimezone from "@/lib/shiftTimezone";
 import { DateTime } from "luxon";
+import { Timezone } from "@/types/timezone";
 
 const TimeInput = () => {
   const [date, setDate] = useState("");
@@ -25,15 +26,11 @@ const TimeInput = () => {
     setTime(event.target.value);
   };
 
-  const handleTimeZoneFromChange = (selectedOption: {
-    value: SetStateAction<string>;
-  }) => {
+  const handleTimeZoneFromChange = (selectedOption: Timezone) => {
     setSelectedTimeZoneFrom(selectedOption.value);
   };
 
-  const handleTimeZoneToChange = (selectedOption: {
-    value: SetStateAction<string>;
-  }) => {
+  const handleTimeZoneToChange = (selectedOption: Timezone) => {
     setSelectedTimeZoneTo(selectedOption.value);
   };
 

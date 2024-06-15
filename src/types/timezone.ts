@@ -1,4 +1,4 @@
 export type Timezone = {
-  name: string;
-  timezone: string;
+  label: string;
+  value: string;
 };
