@@ -26,11 +26,11 @@ const TimeInput = () => {
     setTime(event.target.value);
   };
 
-  const handleTimeZoneFromChange = (selectedOption: Timezone) => {
+  const handleTimeZoneFromChange = (selectedOption: any) => {
     setSelectedTimeZoneFrom(selectedOption.value);
   };
 
-  const handleTimeZoneToChange = (selectedOption: Timezone) => {
+  const handleTimeZoneToChange = (selectedOption: any) => {
     setSelectedTimeZoneTo(selectedOption.value);
   };
 
