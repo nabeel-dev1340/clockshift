@@ -107,12 +107,9 @@ const TimeInput = () => {
             </label>
             <Select
               name="timezoneFrom"
-              value={TimeZones.find((tz) => tz.tzCode === selectedTimeZoneFrom)}
+              value={TimeZones.find((tz) => tz.value === selectedTimeZoneFrom)}
               onChange={handleTimeZoneFromChange}
-              options={TimeZones.map(({ label, tzCode }) => ({
-                label,
-                value: tzCode,
-              }))}
+              options={TimeZones}
               className="w-full"
               required
             />
@@ -126,12 +123,9 @@ const TimeInput = () => {
             </label>
             <Select
               name="timezoneTo"
-              value={TimeZones.find((tz) => tz.tzCode === selectedTimeZoneTo)}
+              value={TimeZones.find((tz) => tz.value === selectedTimeZoneTo)}
               onChange={handleTimeZoneToChange}
-              options={TimeZones.map(({ label, tzCode }) => ({
-                label,
-                value: tzCode,
-              }))}
+              options={TimeZones}
               className="w-full"
               required
             />
