@@ -4,7 +4,6 @@ import Select from "react-select";
 import { TimeZones } from "@/constants/timezones";
 import shiftTimezone from "@/lib/shiftTimezone";
 import { DateTime } from "luxon";
-import { Timezone } from "@/types/timezone";
 
 const TimeInput = () => {
   const [date, setDate] = useState("");
@@ -13,6 +12,7 @@ const TimeInput = () => {
   const [selectedTimeZoneTo, setSelectedTimeZoneTo] = useState("");
   const [convertedTime, setConvertedTime] = useState("");
   const [originalTime, setOriginalTime] = useState("");
+  const [timeDifference, setTimeDifference] = useState("");
 
   const handleDateChange = (event: {
     target: { value: SetStateAction<string> };
@@ -43,7 +43,35 @@ const TimeInput = () => {
         timezoneFrom: selectedTimeZoneFrom,
         timezoneTo: selectedTimeZoneTo,
         selectedDate: date,
-      });
+      }) as string;
+
+      const date1 = new Date(original);
+      const date2 = new Date(converted.split(".")[0]);
+
+      // Calculate the difference in milliseconds
+      const diffInMs = date1.getTime() - date2.getTime();
+
+      // Convert the difference to hours and minutes
+      const diffInMinutes = Math.abs(Math.floor(diffInMs / (1000 * 60)));
+      const hours = Math.floor(diffInMinutes / 60);
+      const minutes = diffInMinutes % 60;
+
+      // Determine if the time is ahead or behind
+      const timeStatus = diffInMs > 0 ? "ahead" : "behind";
+
+      // Construct the time difference string
+      let timeDifferenceString = "";
+      if (hours > 0) {
+        timeDifferenceString += `${hours} hour(s) `;
+      }
+      if (minutes > 0) {
+        timeDifferenceString += `${minutes} minutes `;
+      }
+      if (timeDifferenceString) {
+        timeDifferenceString += timeStatus;
+      } else {
+        timeDifferenceString = "No difference";
+      }
 
       // Format the original and converted times
       const originalDateTime = DateTime.fromISO(original, {
@@ -72,6 +100,7 @@ const TimeInput = () => {
       setConvertedTime(
         `${to12HourFormat(convertedDateTime)} ${selectedTimeZoneTo}`
       );
+      setTimeDifference(timeDifferenceString);
     }
   };
 
@@ -163,6 +192,10 @@ const TimeInput = () => {
             <p>
               <strong>Converted Time:</strong> {convertedTime}
             </p>
+            <div className="mt-4 p-4 bg-blue-100 rounded-md">
+              <p className="font-bold mb-2">Time Difference:</p>
+              <p className="text-lg text-green-700">{timeDifference}</p>
+            </div>
           </div>
         )}
       </div>
