@@ -1,6 +1,7 @@
 "use client";
 import { SetStateAction, useState } from "react";
-import { timeZones } from "@/constants/timezones";
+import Select from "react-select";
+import { TimeZones } from "@/constants/timezones";
 import shiftTimezone from "@/lib/shiftTimezone";
 import { DateTime } from "luxon";
 
@@ -24,16 +25,16 @@ const TimeInput = () => {
     setTime(event.target.value);
   };
 
-  const handleTimeZoneFromChange = (event: {
-    target: { value: SetStateAction<string> };
+  const handleTimeZoneFromChange = (selectedOption: {
+    value: SetStateAction<string>;
   }) => {
-    setSelectedTimeZoneFrom(event.target.value);
+    setSelectedTimeZoneFrom(selectedOption.value);
   };
 
-  const handleTimeZoneToChange = (event: {
-    target: { value: SetStateAction<string> };
+  const handleTimeZoneToChange = (selectedOption: {
+    value: SetStateAction<string>;
   }) => {
-    setSelectedTimeZoneTo(event.target.value);
+    setSelectedTimeZoneTo(selectedOption.value);
   };
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
@@ -68,8 +69,12 @@ const TimeInput = () => {
       };
 
       // Set formatted times
-      setOriginalTime(to12HourFormat(originalDateTime));
-      setConvertedTime(to12HourFormat(convertedDateTime));
+      setOriginalTime(
+        `${to12HourFormat(originalDateTime)} ${selectedTimeZoneFrom}`
+      );
+      setConvertedTime(
+        `${to12HourFormat(convertedDateTime)} ${selectedTimeZoneTo}`
+      );
     }
   };
 
@@ -103,22 +108,17 @@ const TimeInput = () => {
             >
               Select Time Zone (From)
             </label>
-            <select
-              required
+            <Select
               name="timezoneFrom"
-              value={selectedTimeZoneFrom}
+              value={TimeZones.find((tz) => tz.tzCode === selectedTimeZoneFrom)}
               onChange={handleTimeZoneFromChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
-            >
-              <option value="" disabled>
-                Select Time Zone
-              </option>
-              {timeZones.map(({ name, timezone }) => (
-                <option key={timezone} value={timezone}>
-                  {name}
-                </option>
-              ))}
-            </select>
+              options={TimeZones.map(({ label, tzCode }) => ({
+                label,
+                value: tzCode,
+              }))}
+              className="w-full"
+              required
+            />
           </div>
           <div>
             <label
@@ -127,22 +127,17 @@ const TimeInput = () => {
             >
               Select Time Zone (To)
             </label>
-            <select
-              required
+            <Select
               name="timezoneTo"
-              value={selectedTimeZoneTo}
+              value={TimeZones.find((tz) => tz.tzCode === selectedTimeZoneTo)}
               onChange={handleTimeZoneToChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
-            >
-              <option value="" disabled>
-                Select Time Zone
-              </option>
-              {timeZones.map(({ name, timezone }) => (
-                <option key={timezone} value={timezone}>
-                  {name}
-                </option>
-              ))}
-            </select>
+              options={TimeZones.map(({ label, tzCode }) => ({
+                label,
+                value: tzCode,
+              }))}
+              className="w-full"
+              required
+            />
           </div>
           <div>
             <label
@@ -172,12 +167,10 @@ const TimeInput = () => {
         {convertedTime && (
           <div className="mt-4 p-4 bg-green-100 text-green-700 rounded-md">
             <p>
-              <strong>Original Time:</strong>{" "}
-              {`${originalTime} (${selectedTimeZoneFrom})`}
+              <strong>Original Time:</strong> {originalTime}
             </p>
             <p>
-              <strong>Converted Time:</strong>{" "}
-              {`${convertedTime} (${selectedTimeZoneTo})`}
+              <strong>Converted Time:</strong> {convertedTime}
             </p>
           </div>
         )}
