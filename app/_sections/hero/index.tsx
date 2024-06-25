@@ -1,5 +1,5 @@
-import { ClockLogo } from "@/app/_logos/clock";
-import { ShiftLogo } from "@/app/_logos/shift";
+import { ClockLogo } from "@/_logos/clock";
+import { ShiftLogo } from "@/_logos/shift";
 
 export function Hero() {
   return (
@@ -14,7 +14,7 @@ export function Hero() {
         </div>
       </div>
       <p className="text-xl mt-2">
-      Seamlessly Shift Time Zones – Anywhere, Anytime.
+        Seamlessly Shift Time Zones – Anywhere, Anytime.
       </p>
     </div>
   );
