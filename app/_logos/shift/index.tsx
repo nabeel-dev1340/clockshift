@@ -4,7 +4,7 @@ export function ShiftLogo() {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="lg:w-[60px] lg:h-[60px] md:w-[50px] md:h-[50px] w-[40px] h-[40px]"
+      className="w-8 h-8"
     >
       <path
         opacity="0.5"

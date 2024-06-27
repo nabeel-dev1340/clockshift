@@ -1,20 +1,11 @@
-import { ClockLogo } from "@/_logos/clock";
-import { ShiftLogo } from "@/_logos/shift";
-
 export function Hero() {
   return (
-    <div className="flex flex-col text-center mt-20">
-      <div className="flex justify-center items-center gap-2">
-        <h1 className="lg:text-6xl md:text-5xl text-4xl font-bold">
-          ClockShift
-        </h1>
-        <div className="flex">
-          <ClockLogo />
-          <ShiftLogo />
-        </div>
-      </div>
-      <p className="text-xl mt-2">
-        Seamlessly Shift Time Zones – Anywhere, Anytime.
+    <div className="flex flex-col items-center text-center mt-20 p-4">
+      <h1 className="lg:text-4xl md:text-3xl text-2xl font-bold mb-4">
+        Seamless Time Zone Conversions at Your Fingertips
+      </h1>
+      <p className="text-lg max-w-2xl">
+      Transform the way you manage time zones with ClockShift. Easily convert and save your most-used time zones for instant access. Perfect for professionals, travelers, and anyone who values efficient time management.
       </p>
     </div>
   );

@@ -4,8 +4,12 @@ import Select from "react-select";
 import { TimeZones } from "@/constants/timezones";
 import shiftTimezone from "@/lib/shiftTimezone";
 import { DateTime } from "luxon";
+import { useSession } from "next-auth/react";
+import StarLogo from "@/_logos/star";
+import { saveFavourite } from "./action";
 
 const TimeInput = () => {
+  const session = useSession();
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [selectedTimeZoneFrom, setSelectedTimeZoneFrom] = useState("");
@@ -175,13 +179,31 @@ const TimeInput = () => {
               required
             />
           </div>
-          <div>
+          <div className="flex flex-col gap-2">
             <button
               type="submit"
               className="bg-[#FF8F00] p-3 rounded-xl shadow-md font-bold"
             >
               Convert
             </button>
+            {convertedTime && (
+              <div
+                onClick={async () => {
+                  saveFavourite(
+                    selectedTimeZoneFrom,
+                    selectedTimeZoneTo,
+                    "My Fav",
+                    session?.data?.user?.email as string
+                  );
+                }}
+                className="flex gap-2 items-center justify-center bg-white p-3 shadow-md rounded-xl font-bold text-center cursor-pointer"
+              >
+                <span>Add to Favourites</span>
+                <span>
+                  <StarLogo />
+                </span>
+              </div>
+            )}
           </div>
         </form>
         {convertedTime && (
