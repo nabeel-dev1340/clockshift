@@ -15,7 +15,7 @@ export default async function AuthButton({ isUserLoggedIn }: AuthButtonProps) {
             await signIn("google");
           }}
         >
-          <Button>Sign in</Button>
+          <Button className="hover:bg-gray-600">Sign in</Button>
         </form>
       )}
       {isUserLoggedIn && (
