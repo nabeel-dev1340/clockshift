@@ -43,7 +43,7 @@ const AvatarDropdown = ({ avatarURL, name, email }: AvatarDropdownProps) => {
   }, [showDropdown]);
 
   return (
-    <div className="relative cursor-pointer mr-4" ref={dropdownRef}>
+    <div className="relative cursor-pointer mr-2" ref={dropdownRef}>
       <Image
         src={avatarURL as string}
         alt="User Avatar"
@@ -53,54 +53,44 @@ const AvatarDropdown = ({ avatarURL, name, email }: AvatarDropdownProps) => {
         onClick={toggleDropdown}
       />
       {showDropdown && (
-        <div className="flex flex-col gap-1 absolute right-0 top-0 mt-14 mr-4 bg-white shadow-lg rounded-md border border-solid border-transparent p-4 w-[224px]">
+        <div className="flex flex-col gap-1 absolute right-0 top-0 mt-14 mr-2 bg-white shadow-lg rounded-md border border-solid border-transparent p-4 w-[224px]">
           <div className="flex flex-col cursor-default">
             <p>{name}</p>
             <p className="text-sm text-slate-500">{email}</p>
             <hr className="mt-2 mb-2" />
           </div>
-          <div className="flex space-x-2 items-center justify-start hover:bg-gray-200 p-1 rounded">
-            <Image
-              src={ProfileIcon}
-              alt="star icon"
-              width={20}
-              height={20}
-            />
-            <a
-              href="/profile"
-              className="text-gray-700 text-sm text-left hover:text-gray-900"
-            >
+          <a
+            href="/profile"
+            className="flex space-x-2 items-center justify-start hover:bg-gray-200 p-1 rounded"
+          >
+            <Image src={ProfileIcon} alt="star icon" width={20} height={20} />
+            <div className="text-gray-700 text-sm text-left hover:text-gray-900">
               Profile
-            </a>
-          </div>
-          <div className="flex space-x-2 items-center justify-start hover:bg-gray-200 p-1 rounded">
-            <Image
-              src={ShiftIcon}
-              alt="star icon"
-              width={20}
-              height={20}
-            />
-            <a
-              href="/shift"
-              className="text-gray-700 text-sm text-left hover:text-gray-900"
-            >
+            </div>
+          </a>
+          <a
+            href="/shift"
+            className="flex space-x-2 items-center justify-start hover:bg-gray-200 p-1 rounded"
+          >
+            <Image src={ShiftIcon} alt="star icon" width={20} height={20} />
+            <div className="text-gray-700 text-sm text-left hover:text-gray-900">
               Shift
-            </a>
-          </div>
-          <div className="flex space-x-2 items-center justify-start hover:bg-gray-200 p-1 rounded">
+            </div>
+          </a>
+          <a
+            href="/favourites"
+            className="flex space-x-2 items-center justify-start hover:bg-gray-200 p-1 rounded"
+          >
             <Image
               src={FavouritesIcon}
               alt="star icon"
               width={20}
               height={20}
             />
-            <a
-              href="/favourites"
-              className="text-gray-700 text-sm text-left hover:text-gray-900"
-            >
+            <div className="text-gray-700 text-sm text-left hover:text-gray-900">
               Favourites
-            </a>
-          </div>
+            </div>
+          </a>
           <div
             className="flex space-x-2 items-center justify-start hover:bg-gray-200 p-1 rounded"
             onClick={() => signOut({ callbackUrl: "/" })}
